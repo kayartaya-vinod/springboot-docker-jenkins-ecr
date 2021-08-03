@@ -18,7 +18,7 @@ pipeline {
                     def build = docker.build("public.ecr.aws/k6s1i7x9/auth-service:0.0.1-SNAPSHOT", ".")
                     withDockerRegistry(
                         credentialsId: 'ecr:us-east-1:ecr-credentials', 
-                        url: 'https://public.ecr.aws/k6s1i7x9/auth-service') {
+                        url: 'public.ecr.aws/k6s1i7x9/auth-service') {
                         docker.image("public.ecr.aws/k6s1i7x9/auth-service:0.0.1-SNAPSHOT").push()
                     }
                 }
