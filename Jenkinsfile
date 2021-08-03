@@ -23,9 +23,7 @@ pipeline {
             steps {
                 sh "echo pushing image to ecr..."
                 script {
-                    docker.withDockerRegistry(
-                        credentialsId: 'ecr:us-east-1:ecr-credentials', 
-                        url: 'https://public.ecr.aws/k6s1i7x9/auth-service') {
+                    docker.withDockerRegistry('https://public.ecr.aws/k6s1i7x9/auth-service', 'ecr:us-east-1:ecr-credentials') {
                         docker.image("public.ecr.aws/k6s1i7x9/auth-service:0.0.1-SNAPSHOT").push()
                         // sh 'docker push public.ecr.aws/k6s1i7x9/gateway-service:0.0.1-SNAPSHOT'
                     }
