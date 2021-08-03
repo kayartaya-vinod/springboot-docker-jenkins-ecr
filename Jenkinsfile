@@ -10,18 +10,33 @@ pipeline {
             }
         }
 
+        // PUBLIC REPOSITORY
         stage('image - create and push') {
             steps {
-                sh "echo creating image and pushing to ecr..."
+                sh "echo pushing image to ecr..."
                 script {
-                    def build = docker.build("153294646920.dkr.ecr.us-east-1.amazonaws.com/asde-batch5:0.0.1-SNAPSHOT", ".")
+                    def build = docker.build("public.ecr.aws/k6s1i7x9/auth-service:0.0.1-SNAPSHOT", ".")
                     withDockerRegistry(
                         credentialsId: 'ecr:us-east-1:ecr-credentials', 
-                        url: 'https://153294646920.dkr.ecr.us-east-1.amazonaws.com/asde-batch5') {
-                        docker.image("153294646920.dkr.ecr.us-east-1.amazonaws.com/asde-batch5:0.0.1-SNAPSHOT").push()
+                        url: 'https://public.ecr.aws/k6s1i7x9/auth-service') {
+                        docker.image("public.ecr.aws/k6s1i7x9/auth-service:0.0.1-SNAPSHOT").push()
                     }
                 }
             }
+
+        // PRIVATE REPOSITORY - WORKING FINE
+        // stage('image - create and push') {
+        //     steps {
+        //         sh "echo pushing image to ecr..."
+        //         script {
+        //             def build = docker.build("153294646920.dkr.ecr.us-east-1.amazonaws.com/asde-batch5:0.0.1-SNAPSHOT", ".")
+        //             withDockerRegistry(
+        //                 credentialsId: 'ecr:us-east-1:ecr-credentials', 
+        //                 url: 'https://153294646920.dkr.ecr.us-east-1.amazonaws.com/asde-batch5') {
+        //                 docker.image("153294646920.dkr.ecr.us-east-1.amazonaws.com/asde-batch5:0.0.1-SNAPSHOT").push()
+        //             }
+        //         }
+        //     }
         }
     }
     post {
