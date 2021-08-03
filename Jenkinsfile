@@ -22,4 +22,12 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            steps {
+                echo 'cleaning workspace...'
+                cleanWs()
+            }
+        }
+    }
 }
