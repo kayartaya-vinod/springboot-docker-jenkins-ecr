@@ -24,10 +24,8 @@ pipeline {
     }
     post {
         always {
-            steps {
-                echo 'cleaning workspace...'
-                cleanWs()
-            }
+            echo 'cleaning workspace...'
+            cleanWs()
         }
     }
 }
